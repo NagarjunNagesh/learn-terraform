@@ -63,7 +63,12 @@ data "aws_subnet" "subnet1" {
 data "aws_subnet" "subnet2" {
     vpc_id = data.aws_vpc.default.id
     availability_zone = "us-east-1b"
-}			
+}	
+
+data "aws_subnet" "subnet3" {
+    vpc_id = data.aws_vpc.default.id
+    availability_zone = "us-east-1c"
+}
 
 
 #################### Creating Target Group ####################
@@ -95,7 +100,8 @@ resource "aws_lb" "application-lb" {
     security_groups = [aws_security_group.web-server.id]
     subnets = [
                 data.aws_subnet.subnet1.id,
-                data.aws_subnet.subnet2.id
+                data.aws_subnet.subnet2.id,
+                data.aws_subnet.subnet3.id
                 ]
     tags = {
         Name = "whiz-alb"
