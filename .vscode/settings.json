@@ -4,6 +4,7 @@
         "*.tfvars": "terraform",
         "*.tf": "terraform",
         "*.tf.override": "terraform",
-    }
+    },
+    "nuxt.isNuxtApp": false
 }
     
