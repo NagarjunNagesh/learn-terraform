@@ -9,6 +9,7 @@
 
 # Ignore .terraform.lock.hcl file
 .terraform.lock.hcl
+.terraform.tfstate.lock.info
 
 # Ignore any .tfvars files that are intended to be kept private
 secrets.tfvars
