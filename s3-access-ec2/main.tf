@@ -1,29 +1,29 @@
 provider "aws" {
-     region     = var.region
-     access_key = var.access_key
-     secret_key = var.secret_key
+  region     = var.region
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 resource "aws_s3_bucket" "blog" {
-    bucket = var.bucket_name
+  bucket = var.bucket_name
 }
 
 resource "aws_s3_object" "object1" {
-    for_each = fileset("html/", "*")
-    bucket = aws_s3_bucket.blog.id
-    key = each.value
-    source = "html/${each.value}"
-    etag = filemd5("html/${each.value}")
-    content_type = "text/html"
-}			
+  for_each     = fileset("html/", "*")
+  bucket       = aws_s3_bucket.blog.id
+  key          = each.value
+  source       = "html/${each.value}"
+  etag         = filemd5("html/${each.value}")
+  content_type = "text/html"
+}
 
 
 resource "aws_instance" "web" {
-    ami = "ami-02e136e904f3da870"
-    instance_type = "t2.micro"
-    vpc_security_group_ids = [aws_security_group.web-sg.id]
-    iam_instance_profile = aws_iam_instance_profile.SSMRoleForEC2.name
-    user_data = <<EOF
+  ami                    = "ami-02e136e904f3da870"
+  instance_type          = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
+  iam_instance_profile   = aws_iam_instance_profile.SSMRoleForEC2.name
+  user_data              = <<EOF
 
     #!/bin/bash
     sudo su
@@ -60,12 +60,12 @@ resource "aws_security_group" "web-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}			
+}
 
 
 resource "aws_iam_role" "SSMRoleForEC2" {
-    name = "SSMRoleForEC2"
-    assume_role_policy = <<EOF
+  name               = "SSMRoleForEC2"
+  assume_role_policy = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -82,17 +82,17 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "SSMRoleForEC2" {
-    name = "SSMRoleForEC2"
-    role = aws_iam_role.SSMRoleForEC2.name
-}			
+  name = "SSMRoleForEC2"
+  role = aws_iam_role.SSMRoleForEC2.name
+}
 
 
 resource "aws_iam_role_policy_attachment" "role-policy-attachment" {
   for_each = toset([
-    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore", 
+    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
     "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
   ])
 
   role       = aws_iam_role.SSMRoleForEC2.name
   policy_arn = each.value
-}			
+}

@@ -7,14 +7,14 @@ provider "aws" {
 
 ############ Creating a Random String ############
 resource "random_string" "random" {
-  length = 6
+  length  = 6
   special = false
-  upper = false
+  upper   = false
 }
 
 ############ Creating an S3 Bucket ############
 resource "aws_s3_bucket" "bucket" {
-  bucket = "whizbucket-${random_string.random.result}"
+  bucket        = "whizbucket-${random_string.random.result}"
   force_destroy = true
 }
 
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
   block_public_policy     = false
   ignore_public_acls      = false
   restrict_public_buckets = false
-}			
+}
 
 
 # Upload an object
@@ -34,8 +34,8 @@ resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.bucket.id
   key    = "whizlabs_logo_58_32.png"
   source = "image/whizlabs_logo_58_32.png"
-  etag = filemd5("image/whizlabs_logo_58_32.png")
-}			
+  etag   = filemd5("image/whizlabs_logo_58_32.png")
+}
 
 
 #Creating Bucket Policy
@@ -61,4 +61,4 @@ resource "aws_s3_bucket_policy" "public_read_access" {
   ]
 }
 EOF
-}			
+}
