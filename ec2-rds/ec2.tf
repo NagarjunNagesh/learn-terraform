@@ -9,6 +9,6 @@ resource "aws_instance" "web-server" {
     yum install mysql -y
     EOF
   tags = {
-    Name = "whiz_instance"
+    Name = "test_instance"
   }
 }

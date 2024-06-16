@@ -13,13 +13,13 @@ resource "random_string" "random" {
 
 ############ Creating an S3 Bucket ############
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "whizbucket-${random_string.random.result}"
+  bucket        = "testbucket-${random_string.random.result}"
   force_destroy = true
 }
 
 ############ Creating an SNS Topic ############
 resource "aws_sns_topic" "topic" {
-  name   = "whiz-s3-event-notification"
+  name   = "test-s3-event-notification"
   policy = <<POLICY
 {
     "Version":"2012-10-17",
@@ -28,7 +28,7 @@ resource "aws_sns_topic" "topic" {
         "Effect": "Allow",
         "Principal": { "Service": "s3.amazonaws.com" },
         "Action": "SNS:Publish",
-        "Resource": "arn:aws:sns:*:*:whiz-s3-event-notification",
+        "Resource": "arn:aws:sns:*:*:test-s3-event-notification",
         "Condition":{
             "ArnLike":{"aws:SourceArn":"${aws_s3_bucket.bucket.arn}"}
             }

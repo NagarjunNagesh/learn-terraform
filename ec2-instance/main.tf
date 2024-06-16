@@ -24,7 +24,7 @@ resource "aws_security_group" "web-server" {
 resource "aws_instance" "web-server" {
   ami             = "ami-02e136e904f3da870"
   instance_type   = "t2.micro"
-  key_name        = "whizlabs-key"
+  key_name        = "testlabs-key"
   security_groups = ["${aws_security_group.web-server.name}"]
   user_data       = <<-EOF
         #!/bin/bash 
@@ -33,7 +33,7 @@ resource "aws_instance" "web-server" {
         yum install httpd -y
         systemctl start httpd
         systemctl enable httpd
-        echo "<html><h1> Welcome to Whizlabs. Happy Learning... </h1></html>" >> /var/www/html/index.html       
+        echo "<html><h1> Welcome to Testlabs. Happy Learning... </h1></html>" >> /var/www/html/index.html       
         EOF 
   tags = {
     Name = "web_instance"

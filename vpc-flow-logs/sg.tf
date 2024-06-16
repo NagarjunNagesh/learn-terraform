@@ -1,7 +1,7 @@
 # Create Security group for EC2
 resource "aws_security_group" "ec2sg" {
-  name        = "whiz_sg"
-  description = "whizlabssecuritygroup"
+  name        = "test_sg"
+  description = "testlabssecuritygroup"
   vpc_id      = aws_vpc.vpc.id
   ingress {
     from_port   = 22
@@ -22,7 +22,7 @@ resource "aws_security_group" "ec2sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "whiz_sg"
+    Name = "test_sg"
   }
 }
 
@@ -32,7 +32,7 @@ resource "tls_private_key" "example" {
   rsa_bits  = 4096
 }
 
-resource "aws_key_pair" "whiz_key" {
+resource "aws_key_pair" "test_key" {
   key_name   = "MySSHKey"
   public_key = tls_private_key.example.public_key_openssh
 }

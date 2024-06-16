@@ -1,4 +1,4 @@
-resource "aws_elastic_beanstalk_application" "whizapp" {
+resource "aws_elastic_beanstalk_application" "testapp" {
   name        = "test"
   description = "Sample Test Application"
 }
@@ -40,9 +40,9 @@ resource "aws_iam_role_policy_attachment" "role-policy-attachment" {
   policy_arn = each.value
 }
 
-resource "aws_elastic_beanstalk_environment" "whizenv" {
-  name                = "whizenvironment"
-  application         = aws_elastic_beanstalk_application.whizapp.name
+resource "aws_elastic_beanstalk_environment" "testenv" {
+  name                = "testenvironment"
+  application         = aws_elastic_beanstalk_application.testapp.name
   solution_stack_name = "64bit Amazon Linux 2 v3.4.1 running Corretto 17"
 
   setting {

@@ -1,12 +1,12 @@
 ############ Creating a cloudformation stack ############
-resource "aws_cloudformation_stack" "whizstack" {
+resource "aws_cloudformation_stack" "teststack" {
   parameters = {
     DBName         = "MyDatabase"
-    DBPassword     = "whizlabsdb123"
-    DBRootPassword = "whizlabsdbroot123"
-    DBUser         = "WhizlabsDBUser"
+    DBPassword     = "testlabsdb123"
+    DBRootPassword = "testlabsdbroot123"
+    DBUser         = "TestlabsDBUser"
     InstanceType   = "t2.micro"
   }
-  name          = "whiz-stack"
+  name          = "test-stack"
   template_body = file("LAMP_template.json")
 }

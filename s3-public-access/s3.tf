@@ -7,7 +7,7 @@ resource "random_string" "random" {
 
 ############ Creating an S3 Bucket ############
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "whizbucket-${random_string.random.result}"
+  bucket        = "testbucket-${random_string.random.result}"
   force_destroy = true
 }
 
@@ -19,9 +19,9 @@ resource "aws_s3_bucket_public_access_block" "access_pub" {
 # Upload an object
 resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.bucket.id
-  key    = "Whizlabs.png"
-  source = "image/Whizlabs.png"
-  etag   = md5("image/Whizlabs.png")
+  key    = "Testlabs.png"
+  source = "image/Testlabs.png"
+  etag   = md5("image/Testlabs.png")
 }
 
 #Creating Bucket Policy

@@ -6,7 +6,7 @@ provider "aws" {
 
 ############ Creating FIFO Queue ############
 resource "aws_sqs_queue" "queue" {
-  name                        = "MyWhizQueue.fifo"
+  name                        = "MyTestQueue.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }

@@ -32,7 +32,7 @@ resource "aws_instance" "web-server" {
   ami             = "ami-01cc34ab2709337aa"
   instance_type   = "t2.micro"
   count           = 2
-  key_name        = "whizlabs-key"
+  key_name        = "testlabs-key"
   security_groups = ["${aws_security_group.web-server.name}"]
   user_data       = <<-EOF
        #!/bin/bash
@@ -41,7 +41,7 @@ resource "aws_instance" "web-server" {
         yum install httpd -y
         systemctl start httpd
         systemctl enable httpd
-        echo "<html><h1> Welcome to Whizlabs. Happy Learning from $(hostname -f)...</p> </h1></html>" >> /var/www/html/index.html
+        echo "<html><h1> Welcome to Testlabs. Happy Learning from $(hostname -f)...</p> </h1></html>" >> /var/www/html/index.html
         EOF
   tags = {
     Name = "instance-${count.index}"
@@ -82,7 +82,7 @@ resource "aws_lb_target_group" "target-group" {
     healthy_threshold   = 5
     unhealthy_threshold = 2
   }
-  name        = "whiz-tg"
+  name        = "test-tg"
   port        = 80
   protocol    = "HTTP"
   target_type = "instance"
@@ -93,7 +93,7 @@ resource "aws_lb_target_group" "target-group" {
 ############# Creating Application Load Balancer #############
 
 resource "aws_lb" "application-lb" {
-  name               = "whiz-alb"
+  name               = "test-alb"
   internal           = false
   ip_address_type    = "ipv4"
   load_balancer_type = "application"
@@ -104,7 +104,7 @@ resource "aws_lb" "application-lb" {
     data.aws_subnet.subnet3.id
   ]
   tags = {
-    Name = "whiz-alb"
+    Name = "test-alb"
   }
 }
 

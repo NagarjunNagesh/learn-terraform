@@ -4,9 +4,9 @@ resource "aws_rds_cluster" "aurorards" {
   engine                 = "aurora-mysql"
   engine_version         = "5.7.mysql_aurora.2.12.0"
   database_name          = "MyDB"
-  master_username        = "WhizlabsAdmin"
+  master_username        = "TestlabsAdmin"
   availability_zones     = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  master_password        = "Whizlabs123"
+  master_password        = "Testlabs123"
   vpc_security_group_ids = [aws_security_group.rds-server.id]
   storage_encrypted      = false
   skip_final_snapshot    = true

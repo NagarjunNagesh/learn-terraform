@@ -7,6 +7,6 @@ resource "random_string" "random" {
 
 ############ Creating an S3 Bucket ############
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "whizbucket-${random_string.random.result}"
+  bucket        = "testbucket-${random_string.random.result}"
   force_destroy = true
 }

@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_dynamodb_table" "dynamodb_table" {
-  name           = "whiz-table"
+  name           = "test-table"
   billing_mode   = "PROVISIONED"
   read_capacity  = 5
   write_capacity = 5

@@ -35,7 +35,7 @@ resource "aws_instance" "web" {
     EOF
 
   tags = {
-    Name = "Whiz-EC2-Instance"
+    Name = "Test-EC2-Instance"
   }
 }
 

@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_sns_topic" "sns_topic" {
-  name = "whiz-topic"
+  name = "test-topic"
 }
 
 resource "aws_sns_topic_subscription" "sns_subscription" {

@@ -14,7 +14,7 @@ resource "random_string" "random" {
 
 ############ Creating an S3 Bucket ############
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "whizbucket-${random_string.random.result}"
+  bucket        = "testbucket-${random_string.random.result}"
   force_destroy = true
 }
 
@@ -32,9 +32,9 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
 # Upload an object
 resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.bucket.id
-  key    = "whizlabs_logo_58_32.png"
-  source = "image/whizlabs_logo_58_32.png"
-  etag   = filemd5("image/whizlabs_logo_58_32.png")
+  key    = "testlabs_logo_58_32.png"
+  source = "image/testlabs_logo_58_32.png"
+  etag   = filemd5("image/testlabs_logo_58_32.png")
 }
 
 
